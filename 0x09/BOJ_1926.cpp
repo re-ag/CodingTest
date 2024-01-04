@@ -17,7 +17,7 @@ int main() {
 		}
 	}
 	int cnt = 0;
-	int size = 0;
+	int mx = 0;
 	queue<pair<int, int>> q;
 
 	for (int i = 0; i < n; i++) {
@@ -26,11 +26,10 @@ int main() {
 				vis[i][j] = true;
 				q.push({ i,j });
 				++cnt;
-				int tmp = 0;
+				int area = 0;
 				while (!q.empty()) {
 					pair<int, int> cur = q.front(); q.pop();
-					++tmp;
-					//cout << "(" << cur.X << ", " << cur.Y << ") -> ";
+					++area;
 					for (int dir = 0; dir < 4; dir++) {
 						int nx = cur.X + dx[dir];
 						int ny = cur.Y + dy[dir];
@@ -40,12 +39,11 @@ int main() {
 						q.push({ nx,ny });
 					}
 				}
-				//cout << tmp << '\n';
-				size = size < tmp ? tmp : size;
+				mx = mx < area ? area : mx;
 			}
 		}
 	}
 	
 
-	cout << cnt << '\n' << size;
+	cout << cnt << '\n' << mx;
 }
