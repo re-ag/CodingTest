@@ -36,6 +36,7 @@ int main() {
                         if (nx < 0 || ny < 0 || nx >= n || ny >= m) continue;
                         if (board[nx][ny] == 0 || vis[nx][ny]) continue;
                         vis[nx][ny] = true;
+                        // 방금 큐에서 뺀 값에 +1 을 하면 거리 값을 구할 수 있다.
                         board[nx][ny] = board[p.X][p.Y] + 1; // 경로 증가 부분!
                         q.push({ nx,ny });
                     }
