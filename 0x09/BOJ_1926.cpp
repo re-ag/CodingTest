@@ -39,7 +39,7 @@ int main() {
 						q.push({ nx,ny });
 					}
 				}
-				mx = mx < area ? area : mx;
+                mx = max(mx,area);
 			}
 		}
 	}
