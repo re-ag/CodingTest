@@ -39,6 +39,7 @@ int main() {
 	}
 	while (!q.empty()) {
 		auto cur = q.front(); q.pop();
+		tie(curH, curX, curY) = cur;
 		for (int dir = 0; dir < 6; dir++) {
 			int nh = get<0>(cur) + dh[dir];
 			int nx = get<1>(cur) + dx[dir];
@@ -46,7 +47,7 @@ int main() {
 			if (nh < 0 || nx < 0 || ny < 0 || nh >= h || nx >= n || ny >= m) continue;
 			if (board[nh][nx][ny] != 0 || dist[nh][nx][ny]) continue;
 			q.push(make_tuple(nh, nx, ny));
-			board[nh][nx][ny] = board[get<0>(cur)][get<1>(cur)][get<2>(cur)] + 1;
+			board[nh][nx][ny] = board[curH][curX][curY] + 1;
 			dist[nh][nx][ny] = true;
 		}
 	}
