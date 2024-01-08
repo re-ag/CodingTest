@@ -12,42 +12,22 @@ using namespace std;
 */
 bool vis[100001];
 int n, k;
-int dx[3] = { -1, 1, 2 };
 int main() {
     cin >> n >> k;
     int ans = 0;
     queue<pair<int, int>> q;
     q.push({ n, ans });
     vis[n] = true;
-    while (!q.empty()) {
+    while (!vis[k]) {
         auto p = q.front(); q.pop();
         int cur = p.first;
         int n = p.second;
-      /*  if (cur == k) {
-            cout << n;
-            return 0;
-        }*/
-        for (int i = 0; i < 3; i++) {
-            if (i != 2) {
-                if (cur + dx[i] < 0 || cur + dx[i] > 100000) continue;
-                if (vis[cur + dx[i]]) continue;
-                q.push({ cur + dx[i], n + 1 });
-                vis[cur + dx[i]] = true;
-                if (cur + dx[i] == k) {
-                    ans = n + 1;
-                    break;
-                }
-            }
-            else {
-                if (cur * dx[i] < 0 || cur * dx[i] > 100000) continue;
-                if (vis[cur * dx[i]]) continue;
-                q.push({ cur * dx[i], n + 1 });
-                vis[cur * dx[i]] = true;
-                if (cur * dx[i] == k) {
-                    ans = n + 1;
-                    break;
-                }
-            }
+        for (int nxt : { cur - 1, cur + 1, cur * 2}) {
+            if (nxt < 0 || nxt > 100000) continue;
+            if (vis[nxt]) continue;
+            q.push({ nxt, n + 1 });
+            vis[nxt] = true;
+            if (nxt == k) ans = n + 1;
         }
     }
     cout << ans;
