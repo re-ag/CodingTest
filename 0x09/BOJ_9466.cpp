@@ -12,11 +12,30 @@ using namespace std;
 	결국 팀이 되지 못하는 사람은 -> 순환 그래프 내 속하지 않는 노드임
 	따라서 모든 arr원소에 대해서 순환 그래프에 속하는지 아닌지 검사하여 판단 가능
 	But, O(N^2)
+
+	O(N) 방법
+	x 학생부터 시작해서 다음 학생으로 이동하면서,
+	1. 사이클에 포함된 학생 또는 포함되지 않는 학생을 "재방문"할 경우, x는 사이클에 포함되지 않은 학생!
+	   지금까지 방문한 학생들은 사이클에 포함되지 않은 학생
+	2. x가 아닌 다른 학생 y를 재방문한 경우, x는 사이클에 포함되지 않으며 y는 사이클에 포함된다.
+	   y에서 출발하여 다시 y에 도달할 때 까지 만나는 학생들을 사이클에 포함된 학생들로.
+	   x에서 출발하여 y에 도달할 때 까지 만나는 학생들을 사이클에 포함되지 않은 학생들로 만든다.
+	3. x를 재방문 할 경우, x는 사이클에 포함되는 학생.
+	   x에서 시작하여 다시 x에 도달할 때 까지 만나는 학생들을 사이클에 포함된 학생으로 만든다.
+	
+	방문 처리를 함으로써 원래는 전체 N개의 노드마다 모든 경우를 계속 최대 N번씩 방문해야 했지만, 
+	한 번 확인했을때, 방문처리를 위해 한 번 더 순회하면 N*2 만큼 반복만 할 수 있다.
+	따라서 O(N)
 */
 
 int test, n;
 int arr[100001];
 int state[100001];
+
+const int NOT_VISITED = 0;
+const int VISITED = 1;
+const int CYCLE_IN = 2;
+const int NOT_CYCLE_IN = 3;
 
 bool iscycle(int idx) {
 	int cur = idx;
@@ -25,6 +44,41 @@ bool iscycle(int idx) {
 		if (cur == idx) return true;
 	}
 	return false;
+}
+
+void run(int x) {
+	int cur = x;
+	while (true) {
+		state[cur] = VISITED;
+		cur = arr[cur]; // 다음
+		if (state[cur] == CYCLE_IN || state[cur] == NOT_CYCLE_IN) { // 1의 경우
+			cur = x;
+			while (state[cur] == VISITED) {
+				state[cur] = NOT_CYCLE_IN;
+				cur = arr[cur];
+			}
+			return;
+		}
+		if (state[cur] == VISITED && cur != x) { // x가 아닌 다른 학생(cur)을 재방문 한경우
+			while (state[cur] != CYCLE_IN) { // cur까지의 학생들은 CYCLE_IN 처리
+				state[cur] = CYCLE_IN;
+				cur = arr[cur];
+			}
+			cur = x;
+			while (state[cur] != CYCLE_IN) { // cycle에 속한 노드에 도달할 때 까지 NOT_CYCLE_IN 처리
+				state[cur] = NOT_CYCLE_IN;
+				cur = arr[cur];
+			}
+			return;
+		}
+		if (state[cur] == VISITED && cur == x) { // x 자신을 다시 재방문 한 경우
+			while (state[cur] != CYCLE_IN) {
+				state[cur] = CYCLE_IN;
+				cur = arr[cur];
+			}
+			return;
+		}
+	}
 }
 int main() {
 	queue<int> q;
@@ -36,10 +90,15 @@ int main() {
 			cin >> arr[i];
 			state[i] = 0;
 		}
-		for (int i = 1; i <= n; i++) {
+		/*for (int i = 1; i <= n; i++) {
 			if (!iscycle(i)) cnt++;
+		}*/
+		for (int i = 1; i <= n; i++) {
+			if (state[i] == NOT_VISITED) run(i);
 		}
-
+		for (int i = 1; i <= n; i++) {
+			if (state[i] == NOT_CYCLE_IN) cnt++;
+		}
 		cout << cnt << '\n';
 	}
 }
