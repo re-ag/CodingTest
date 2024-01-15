@@ -33,9 +33,7 @@ int arr[100001];
 int state[100001];
 
 const int NOT_VISITED = 0;
-const int VISITED = 1;
-const int CYCLE_IN = 2;
-const int NOT_CYCLE_IN = 3;
+const int CYCLE_IN = -1;
 
 bool iscycle(int idx) {
 	int cur = idx;
@@ -49,38 +47,23 @@ bool iscycle(int idx) {
 void run(int x) {
 	int cur = x;
 	while (true) {
-		state[cur] = VISITED;
-		cur = arr[cur]; // 다음
-		if (state[cur] == CYCLE_IN || state[cur] == NOT_CYCLE_IN) { // 1의 경우
-			cur = x;
-			while (state[cur] == VISITED) {
-				state[cur] = NOT_CYCLE_IN;
+		state[cur] = x;
+		cur = arr[cur];
+		if (state[cur] == x) { // 재방문했을 경우!
+			while (state[cur] != CYCLE_IN) { //cur(순환그래프에 속하는 학생) 부터 다 cycle_in처리!
+				state[cur] = CYCLE_IN;
 				cur = arr[cur];
 			}
 			return;
 		}
-		if (state[cur] == VISITED && cur != x) { // x가 아닌 다른 학생(cur)을 재방문 한경우
-			while (state[cur] != CYCLE_IN) { // cur까지의 학생들은 CYCLE_IN 처리
-				state[cur] = CYCLE_IN;
-				cur = arr[cur];
-			}
-			cur = x;
-			while (state[cur] != CYCLE_IN) { // cycle에 속한 노드에 도달할 때 까지 NOT_CYCLE_IN 처리
-				state[cur] = NOT_CYCLE_IN;
-				cur = arr[cur];
-			}
-			return;
-		}
-		if (state[cur] == VISITED && cur == x) { // x 자신을 다시 재방문 한 경우
-			while (state[cur] != CYCLE_IN) {
-				state[cur] = CYCLE_IN;
-				cur = arr[cur];
-			}
+		else if (state[cur] != 0) {
 			return;
 		}
 	}
 }
 int main() {
+	ios::sync_with_stdio(0);
+	cin.tie(0);
 	queue<int> q;
 	cin >> test;
 	while (test--) {
@@ -90,14 +73,11 @@ int main() {
 			cin >> arr[i];
 			state[i] = 0;
 		}
-		/*for (int i = 1; i <= n; i++) {
-			if (!iscycle(i)) cnt++;
-		}*/
 		for (int i = 1; i <= n; i++) {
 			if (state[i] == NOT_VISITED) run(i);
 		}
 		for (int i = 1; i <= n; i++) {
-			if (state[i] == NOT_CYCLE_IN) cnt++;
+			if (state[i] != CYCLE_IN) cnt++;
 		}
 		cout << cnt << '\n';
 	}
