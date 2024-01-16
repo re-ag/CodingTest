@@ -37,6 +37,18 @@ using namespace std;
         2-2. arr원소가 0이 아닌 경우 탐색 종료
         2-3. 거리값 갱신
 
+
+    10
+    1 1 1 0 0 0 0 1 1 1
+    1 1 1 1 0 0 0 0 1 1
+    1 0 1 1 0 0 0 0 1 1
+    0 0 1 1 1 0 0 0 0 1
+    0 0 0 1 0 0 0 0 0 1
+    0 0 0 0 0 0 0 0 0 1
+    0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0 0
+
 */
 #define X first
 #define Y second
@@ -46,92 +58,92 @@ int dist[101][101];
 int dx[4] = { 1,-1,0,0 };
 int dy[4] = { 0,0,-1,1 };
 
-int area = 2;
-int bfs(int i, int j) {
-    queue<pair<int, int>> q;
-    queue<pair<int, int>> q2;
-    for (int t = 0; t < n; t++)
-        fill(dist[t], dist[t] + n, 0);
-    q.push({ i,j });
-    arr[i][j] = area++;
-    while (!q.empty()) {
-        auto cur = q.front(); q.pop();
-        for (int dir = 0; dir < 4; dir++) {
-            int nx = dx[dir] + cur.X;
-            int ny = dy[dir] + cur.Y;
-            if (nx < 0 || ny < 0 || nx >= n || ny >= n) continue;
-            if (arr[nx][ny] == 0) {
-                q2.push({ cur.X, cur.Y });
-                dist[cur.X][cur.Y] = 1;
-                continue;
-            }
-            if (arr[nx][ny] != 1) continue;
-            q.push({ nx, ny });
-            arr[nx][ny] = arr[cur.X][cur.Y];
-        }
-    }
-    //
-    while (!q2.empty()) {
-        auto cur = q2.front(); q2.pop();
-        for (int dir = 0; dir < 4; dir++) {
-            int nx = dx[dir] + cur.X;
-            int ny = dy[dir] + cur.Y;
-            if (nx < 0 || ny < 0 || nx >= n || ny >= n) continue;
-            if (arr[nx][ny] == area) continue; // 같은 대륙에 도착한 경우
-            if (dist[nx][ny] != 0) continue; // 이미 방문한 경우
-            if (arr[nx][ny] != area && arr[nx][ny] != 0) { //다른 대륙에 도착한 경우
-                return dist[cur.X][cur.Y] - 1;
-                //break;
-            }
-            q2.push({ nx,ny });
-            dist[nx][ny] = dist[cur.X][cur.Y] + 1;
-        }
-    }
-    
-}
+int area = 1;
+
 void print() {
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++)
-            cout << arr[i][j] << ' ';
-        cout << '\n';
-    }
+  cout << "--------------------arr------------------------\n";
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++)
+      cout << arr[i][j] << ' ';
     cout << '\n';
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++)
-            cout << dist[i][j] << ' ';
-        cout << '\n';
+  }
+  cout << "--------------------dist------------------------\n";
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++)
+      cout << dist[i][j] << ' ';
+    cout << '\n';
+  }
+}
+
+int bfs(int i, int j) {
+  area++;
+  queue<pair<int, int>> q;
+  queue<pair<int, int>> q2;
+  for (int t = 0; t < n; t++)
+    fill(dist[t], dist[t] + n, 0);
+  q.push({ i,j });
+  arr[i][j] = area;
+  while (!q.empty()) {
+    auto cur = q.front(); q.pop();
+    for (int dir = 0; dir < 4; dir++) {
+      int nx = dx[dir] + cur.X;
+      int ny = dy[dir] + cur.Y;
+      if (nx < 0 || ny < 0 || nx >= n || ny >= n) continue;
+      if (arr[nx][ny] == 0) {
+        q2.push({ cur.X, cur.Y });
+        dist[cur.X][cur.Y] = 1;
+        continue;
+      }
+      if (arr[nx][ny] != 1) continue;
+      q.push({ nx, ny });
+      arr[nx][ny] = arr[cur.X][cur.Y];
     }
+  }
+  //
+  while (!q2.empty()) {
+    auto cur = q2.front(); q2.pop();
+    for (int dir = 0; dir < 4; dir++) {
+      int nx = dx[dir] + cur.X;
+      int ny = dy[dir] + cur.Y;
+      if (nx < 0 || ny < 0 || nx >= n || ny >= n) continue;
+      if (arr[nx][ny] == area) continue; // 같은 대륙에 도착한 경우
+      if (dist[nx][ny] != 0) continue; // 이미 방문한 경우
+      if (arr[nx][ny] != area && arr[nx][ny] != 0) { //다른 대륙에 도착한 경우
+        print();
+        return dist[cur.X][cur.Y] - 1;
+        //break;
+      }
+      q2.push({ nx,ny });
+      dist[nx][ny] = dist[cur.X][cur.Y] + 1;
+    }
+  }
+
 }
 int main() {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-    cin >> n;
-    int min_ = 10001;
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++)
-            cin >> arr[i][j];
-    }
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  cin >> n;
+  int min_ = 10001;
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++)
+      cin >> arr[i][j];
+  }
 
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            if (arr[i][j] == 1) {
-                cout << bfs(i, j) << '\n';
-                print();
-            }
-                
-                //min_ = min(min_, bfs(i, j));
-        }
-    }
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++) {
+      if (arr[i][j] == 1) {
+        //cout << bfs(i, j) << '\n';
 
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++)
-            cout << setw(3) << arr[i][j] << ' ';
-        cout << '\n';
+        min_ = min(min_, bfs(i, j));
+      }
+
     }
-    //cout << '\n';
-    //for (int i = 0; i < n; i++) {
-    //    for (int j = 0; j < n; j++)
-    //        cout << setw(3) << dist[i][j] << ' ';
-    //    cout << '\n';
-    //}
+  }
+  cout << min_ << '\n';
+  //cout << '\n';
+  //for (int i = 0; i < n; i++) {
+  //    for (int j = 0; j < n; j++)
+  //        cout << setw(3) << dist[i][j] << ' ';
+  //    cout << '\n';
+  //}
 }
