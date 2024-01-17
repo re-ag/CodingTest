@@ -138,4 +138,5 @@ int main() {
 		}
 	}
 	cout << min_ << '\n';
+
 }
