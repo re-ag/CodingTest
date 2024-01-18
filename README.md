@@ -6,14 +6,14 @@
 ## 문제 풀이 현황
 | 번호 | 주제 | 진행도 |
 | :--: | :--: | :--: |
-| 0x02 | [기초 코드 작성 요령 II](workbook/0x02.md) | ![100%](https://progress-bar.dev/4/?scale=27&title=progress&width=500&color=babaca&suffix=/27) |
-| 0x03 | [배열](workbook/0x03.md) | ![100%](https://progress-bar.dev/3/?scale=8&title=progress&width=500&color=babaca&suffix=/8) |
-| 0x04 | [연결 리스트](workbook/0x04.md) | ![100%](https://progress-bar.dev/2/?scale=3&title=progress&width=500&color=babaca&suffix=/3) |
-| 0x05 | [스택](workbook/0x05.md) | ![100%](https://progress-bar.dev/3/?scale=8&title=progress&width=500&color=babaca&suffix=/8) |
-| 0x06 | [큐](workbook/0x06.md) | ![100%](https://progress-bar.dev/1/?scale=3&title=progress&width=500&color=babaca&suffix=/3) |
-| 0x07 | [덱](workbook/0x07.md) | ![100%](https://progress-bar.dev/1/?scale=4&title=progress&width=500&color=babaca&suffix=/4) |
-| 0x08 | [스택의 활용(수식의 괄호 쌍)](workbook/0x08.md) | ![100%](https://progress-bar.dev/2/?scale=5&title=progress&width=500&color=babaca&suffix=/5) |
-| 0x09 | [BFS](workbook/0x09.md) | ![100%](https://progress-bar.dev/17/?scale=30&title=progress&width=500&color=babaca&suffix=/30) |
+| 0x02 | [기초 코드 작성 요령 II](https://github.com/encrypted-def/basic-algo-lecture/blob/master/workbook/0x02.md) | ![100%](https://progress-bar.dev/4/?scale=27&title=progress&width=500&color=babaca&suffix=/27) |
+| 0x03 | [배열](https://github.com/encrypted-def/basic-algo-lecture/blob/master/workbook/0x03.md) | ![100%](https://progress-bar.dev/3/?scale=8&title=progress&width=500&color=babaca&suffix=/8) |
+| 0x04 | [연결 리스트](https://github.com/encrypted-def/basic-algo-lecture/blob/master/workbook/0x04.md) | ![100%](https://progress-bar.dev/2/?scale=3&title=progress&width=500&color=babaca&suffix=/3) |
+| 0x05 | [스택](https://github.com/encrypted-def/basic-algo-lecture/blob/master/workbook/0x05.md) | ![100%](https://progress-bar.dev/3/?scale=8&title=progress&width=500&color=babaca&suffix=/8) |
+| 0x06 | [큐](https://github.com/encrypted-def/basic-algo-lecture/blob/master/workbook/0x06.md) | ![100%](https://progress-bar.dev/1/?scale=3&title=progress&width=500&color=babaca&suffix=/3) |
+| 0x07 | [덱](https://github.com/encrypted-def/basic-algo-lecture/blob/master/workbook/0x07.md) | ![100%](https://progress-bar.dev/1/?scale=4&title=progress&width=500&color=babaca&suffix=/4) |
+| 0x08 | [스택의 활용(수식의 괄호 쌍)](https://github.com/encrypted-def/basic-algo-lecture/blob/master/workbook/0x08.md) | ![100%](https://progress-bar.dev/2/?scale=5&title=progress&width=500&color=babaca&suffix=/5) |
+| 0x09 | [BFS](https://github.com/encrypted-def/basic-algo-lecture/blob/master/workbook/0x09.md) | ![100%](https://progress-bar.dev/17/?scale=30&title=progress&width=500&color=babaca&suffix=/30) |
 | 0x0A | DFS (문제집 X) | |
 | 0x0B | [재귀](https://github.com/encrypted-def/basic-algo-lecture/blob/master/workbook/0x0B.md) | ![100%](https://progress-bar.dev/0/?scale=10&title=progress&width=500&color=babaca&suffix=/10) |
 | 0x0C | [백트래킹](https://github.com/encrypted-def/basic-algo-lecture/blob/master/workbook/0x0C.md) | ![100%](https://progress-bar.dev/0/?scale=20&title=progress&width=500&color=babaca&suffix=/20) |
