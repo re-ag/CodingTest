@@ -2,7 +2,6 @@
 using namespace std;
 /*
 	BOJ 9663 N-Queen
-
 	https://www.acmicpc.net/problem/9663
 
 	현재 N-Queens 가 가능한 좌표의 수열을 구하고 있음
@@ -11,7 +10,6 @@ using namespace std;
 
 	다시 구현 필요
 	0행의 0부터 N-1까지의 열에 대해서 한번만 순회해보기!
-
 */
 #define X first
 #define Y second
