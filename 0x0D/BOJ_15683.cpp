@@ -4,6 +4,13 @@ using namespace std;
 /*
   BOJ 15684 감시
   https://www.acmicpc.net/problem/15683
+
+  4 6
+    2 6 0 3 0 2
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 6 1
+    답 : 8, 나: 7
 */
 int n, m;
 int arr[9][9];
@@ -37,6 +44,7 @@ void print() {
 }
 void right(int x, int y) {
     for (int i = y + 1; i < m; i++) {
+        if (i < 0 || i >= m) continue;
         if (arr[x][i] == 6)
             break;
         if (!arr[x][i])
@@ -44,7 +52,8 @@ void right(int x, int y) {
     }
 }
 void left(int x, int y) {
-    for (int i = 0; i < y; i++) {
+    for (int i = y-1; i >= 0; i--) {
+        if (i < 0 || i >= m) continue;
         if (arr[x][i] == 6)
             break;
         if (!arr[x][i])
@@ -52,7 +61,8 @@ void left(int x, int y) {
     }
 }
 void top(int x, int y) {
-    for (int i = 0; i < x; i++) {
+    for (int i = x-1; i >= 0; i--) {
+        if (i < 0 || i >= n) continue;
         if (arr[i][y] == 6)
             break;
         if (!arr[i][y])
@@ -168,7 +178,8 @@ int main() {
         for (int i = 0; i < camCnt; i++) {
             cctv(i, degcase[i]);
         }
-        ans = min(ans, countZero());
+        int zero = countZero();
+        ans = min(ans, zero);
         reset();
     }
     cout << ans;
