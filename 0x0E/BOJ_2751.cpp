@@ -3,7 +3,6 @@ using namespace std;
 /*
     BOJ 2751 수 정렬하기 2
     https://www.acmicpc.net/problem/2751
-    Use Merge Sort
 */
 int n = 10;
 int arr[1'000'001];
@@ -31,6 +30,7 @@ void merge_sort(int st, int en) {
     merge_sort(mid, en);
     merge(st, en);
 }
+
 int main() {
     ios::sync_with_stdio(0);
     cin.tie(0);
