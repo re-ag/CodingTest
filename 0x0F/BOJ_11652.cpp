@@ -21,17 +21,27 @@ int main(){
 	ll mxVal = -(1 << 62) - 1; // 현재까지 가장 많이 등장한 수의 값
 	int mxCnt = 0; // 현재까지 가장 많이 등장한 수의 count 값
 	for (int i = 0; i < n; i++) {
-		if (i == 0 || arr[i-1] == arr[i]) {
+		if (prev == arr[i]) {
 			++cnt;
 		}
 		else{
-			if (mxCnt < cnt){
-				mxVal = arr[i-1];
-				mxCnt = cnt;
-			}
+			if (mxCnt < cnt)
+				mxVal = prev;
+			else if (mxCnt == cnt)
+				mxVal = min(mxVal, prev);
+			
+			mxCnt = max(cnt, mxCnt);
 			cnt = 1;
 		}
+		if (i == n - 1) {
+			if (mxCnt < cnt)
+				mxVal = prev;
+			else if (mxCnt == cnt)
+				mxVal = min(mxVal, prev);
+			mxCnt = max(cnt, mxCnt);
+			cnt = 1;
+		}
+		prev = arr[i];
 	}
-	if(cnt > mxCnt) mxVal = arr[n-1];
 	cout << mxVal;
 }
