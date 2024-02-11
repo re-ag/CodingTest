@@ -19,7 +19,7 @@
 | 0x0D | [시뮬레이션](https://github.com/encrypted-def/basic-algo-lecture/blob/master/workbook/0x0D.md) | ![100%](https://progress-bar.dev/4/?scale=61&title=progress&width=500&color=babaca&suffix=/61) |
 | 0x0E | [정렬 I](https://github.com/encrypted-def/basic-algo-lecture/blob/master/workbook/0x0E.md) | ![100%](https://progress-bar.dev/8/?scale=8&title=progress&width=500&color=babaca&suffix=/8) |
 | 0x0F | [정렬 II](https://github.com/encrypted-def/basic-algo-lecture/blob/master/workbook/0x0F.md) | ![100%](https://progress-bar.dev/4/?scale=9&title=progress&width=500&color=babaca&suffix=/9) |
-| 0x10 | [다이나믹 프로그래밍](https://github.com/encrypted-def/basic-algo-lecture/blob/master/workbook/0x10.md) | ![100%](https://progress-bar.dev/4/?scale=44&title=progress&width=500&color=babaca&suffix=/44) |
+| 0x10 | [다이나믹 프로그래밍](https://github.com/encrypted-def/basic-algo-lecture/blob/master/workbook/0x10.md) | ![100%](https://progress-bar.dev/8/?scale=44&title=progress&width=500&color=babaca&suffix=/44) |
 | 0x11 | [그리디](https://github.com/encrypted-def/basic-algo-lecture/blob/master/workbook/0x11.md) | ![100%](https://progress-bar.dev/0/?scale=17&title=progress&width=500&color=babaca&suffix=/17) |
 | 0x12 | [수학](https://github.com/encrypted-def/basic-algo-lecture/blob/master/workbook/0x12.md) | ![100%](https://progress-bar.dev/6/?scale=39&title=progress&width=500&color=babaca&suffix=/39) |
 | 0x13 | [이분탐색](https://github.com/encrypted-def/basic-algo-lecture/blob/master/workbook/0x13.md) | ![100%](https://progress-bar.dev/1/?scale=21&title=progress&width=500&color=babaca&suffix=/21) |
