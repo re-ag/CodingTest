@@ -7,49 +7,61 @@ using namespace std;
 */
 int k;
 string arr[4];
-int r[4];
-bool change[4];
+int r[4] = { 0 };
+
 int result() {
 	int res = 0;
-	if (arr[0][0]) res += 1;
-	if (arr[1][0]) res += 2;
-	if (arr[2][0]) res += 4;
-	if (arr[3][0]) res += 8;
+	if (arr[0][0] == '1') res += 1;
+	if (arr[1][0] == '1') res += 2;
+	if (arr[2][0] == '1') res += 4;
+	if (arr[3][0] == '1') res += 8;
 	return res;
 }
 
-void check() {
-	if (arr[0][2] != arr[1][6]) { //0과 1비교
-		change[0] = change[1] = true;
+void startRot(int idx) {
+	int cur = r[idx]; // 현재 idx의 방향값
+	if (idx == 0) {
+		for (int i = idx; i < 3; i++) {
+			if (arr[i][2] != arr[i + 1][6]) r[i + 1] = r[i] * -1;
+			else break;
+		}
 	}
-	if (arr[1][2] != arr[2][6]) { // 1과 2비교
-		change[1] = change[2] = true;
+	else if (idx == 1 || idx == 2) {
+		for (int i = idx; i < 3; i++) {
+			if (arr[i][2] != arr[i + 1][6]) r[i + 1] = r[i] * -1;
+			else break;
+		}
+		for (int i = idx; i >= 1; i--) {
+			if (arr[i][6] != arr[i - 1][2]) r[i - 1] = r[i] * -1;
+			else break;
+		}
 	}
-	if (arr[2][2] != arr[3][6]) { // 2와 3 비교
-		change[2] = change[3] = true;
+	else {
+		for (int i = idx; i >= 1; i--) {
+			if (arr[i][6] != arr[i - 1][2]) r[i - 1] = r[i] * -1;
+			else break;
+		}
 	}
 }
-void setRot(int idx, ) {
-
-}
-void rotate(int idx, int dir) {
-	char temp[8];
-	if (dir == 1) { // 시계방향
-		for (int i = 1; i < 8; i++) {
-			temp[i] = arr[idx][i - 1];
+void rotate() {
+	for (int idx = 0; idx < 4; idx++) {
+		char temp[8];
+		if (r[idx] == 1) { // 시계방향
+			for (int i = 1; i < 8; i++) {
+				temp[i] = arr[idx][i - 1];
+			}
+			temp[0] = arr[idx][7];
+			for (int i = 0; i < 8; i++)
+				arr[idx][i] = temp[i];
 		}
-		temp[0] = arr[idx][7];
-		for (int i = 0; i < 8; i++)
-			arr[idx][i] = temp[i];
-	}
-	else { // 반시계방향
-		
-		for (int i = 0; i < 7; i++) {
-			temp[i] = arr[idx][i + 1];
+		else if (r[idx] == -1) { // 반시계방향
+			for (int i = 0; i < 7; i++) {
+				temp[i] = arr[idx][i + 1];
+			}
+			temp[7] = arr[idx][0];
+			for (int i = 0; i < 8; i++)
+				arr[idx][i] = temp[i];
 		}
-		temp[7] = arr[idx][0];
-		for (int i = 0; i < 8; i++)
-			arr[idx][i] = temp[i];
 	}
 }
 int main() {
@@ -58,11 +70,11 @@ int main() {
 	for (int i = 0; i < 4; i++) cin >> arr[i];
 	cin >> k;
 	while (k--) {
-		int i, d;
-		cin >> i >> d;
-		r[i] = d;
-		check();
-		rotate(i, d);
+		for (int i = 0; i < 4; i++) r[i] = 0;
+		int i, j;
+		cin >> i >> j; r[i-1] = j;
+		startRot(i - 1);
+		rotate();
 	}
 
 	cout << result();
