@@ -21,6 +21,7 @@
         "xutility": "cpp",
         "cmath": "cpp",
         "iostream": "cpp",
-        "xiosbase": "cpp"
+        "xiosbase": "cpp",
+        "algorithm": "cpp"
     }
 }
