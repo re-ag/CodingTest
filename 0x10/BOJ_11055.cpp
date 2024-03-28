@@ -15,19 +15,20 @@ using namespace std;
 */
 int n;
 int arr[1001];
-vector<pair<int,int>> dp;
+vector<int> dp;
 int main(){
 	cin >> n;
 	for(int i = 0; i<n; i++)
 		cin >> arr[i];
-	dp.push_back({arr[0], arr[0]});
+	dp.push_back(arr[0]);
 	for(int i = 1; i < n; i++){
 		int res = 0;
 		for(int j = i - 1; j >= 0; j--){
-			res = max(res, dp[j].first);
+			if(arr[j] < arr[i])
+				res = max(res, dp[j]);
 		}
 		res += arr[i];
-		dp.push_back({res, arr[i]});
+		dp.push_back(res);
 	}
-	cout << (*max_element(dp.begin(), dp.end())).first;
+	cout << *max_element(dp.begin(), dp.end());
 }
